@@ -1,0 +1,26 @@
+const puppeteer = require('puppeteer');
+
+async function openMultiplePages() {
+  // Launch the browser
+  const browser = await puppeteer.launch({
+    headless: false, // Set to 'false' to see the browser; 'true' to run headless
+    defaultViewport: null, // Optional: For default screen size
+    args: ['--start-maximized'] // Optional: To start the browser maximized
+  });
+
+  // Open 30 pages
+  const pages = [];
+  for (let i = 0; i < 30; i++) {
+    const page = await browser.newPage();
+    pages.push(page);
+    await page.goto('https://chaturbate.com/lexi_breeze/'); // Replace with the website you want to automate
+  }
+
+  // Wait for a while before closing (optional)
+  await new Promise(resolve => setTimeout(resolve, 60000)); // Wait 1 minute
+
+  // You can close the browser after some time or keep it running
+  // await browser.close();
+}
+
+openMultiplePages().catch(console.error);
